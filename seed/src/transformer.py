@@ -10,4 +10,7 @@ def text_clean(rawDataValue):
     
     rawDataValue = str(rawDataValue) # Convert to string
     rawDataValue = re.sub(r'\s*\(.*?\)\s*', '', rawDataValue) # Remove text within and parentheses and whitespaces
+
+    rawDataValue = re.sub(r'^by\s+', '', rawDataValue, flags=re.IGNORECASE) # Remove "By" before authors names
+
     return rawDataValue.strip() # Remove whitespaces at the beginning and end of string
