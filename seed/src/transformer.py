@@ -60,3 +60,21 @@ def extract_month(rawMonthValue):
     }
     
     return month_mapping.get(rawMonthValue) # Return the number of the month
+
+def check_price(rawPriceValue):
+    if pd.isna(rawPriceValue):
+        return None # Convert NaN to None to tell PostgreSQL to store NULL
+    
+    return rawPriceValue
+
+def create_book(rawBookDataRow):
+    return {
+        "title": text_clean(rawBookDataRow["Title"]),
+        "description": text_clean(rawBookDataRow["Description"]),
+        "price": check_price(rawBookDataRow["Price Starting With ($)"]),
+        "publish_month": extract_month(rawBookDataRow["Publish Date (Month)"]),
+        "publish_year": rawBookDataRow["Publish Date (Year)"],
+        "publisher": text_clean(rawBookDataRow["Publisher"]),
+        "authors": extract_authors(rawBookDataRow["Authors"]),
+        "categories": extract_categories(rawBookDataRow["Category"]),
+    }
