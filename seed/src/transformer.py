@@ -38,3 +38,25 @@ def extract_categories(rawCategoryValue):
         category_clean = category.strip() # Remove whitespaces before and after
         categories.append(category_clean) # Add "cleaned" category to list of categories
     return categories
+
+def extract_month(rawMonthValue):
+    rawMonthValue = text_clean(rawMonthValue) # Clean the raw month value
+    if not rawMonthValue:
+        return None # Return None if no value (None, NaN, empty string)
+    
+    month_mapping = {
+        "January": 1,
+        "February": 2,
+        "March": 3,
+        "April": 4,
+        "May": 5,
+        "June": 6,
+        "July": 7,
+        "August": 8,
+        "September": 9,
+        "October": 10,
+        "November": 11,
+        "December": 12
+    }
+    
+    return month_mapping.get(rawMonthValue) # Return the number of the month
