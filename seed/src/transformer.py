@@ -26,3 +26,15 @@ def extract_authors(rawAuthorsValue):
         author_clean = author.strip() # Remove whitespaces before and after
         authors.append(author_clean) # Add "cleaned" author to list of authors
     return authors
+
+def extract_categories(rawCategoryValue):
+    rawCategoryValue = text_clean(rawCategoryValue) # Clean the raw category value
+    if not rawCategoryValue:
+        return [] # Return empty list if no value (None, NaN, empty string)
+    
+    categories = []
+    
+    for category in rawCategoryValue.split(","): # Split categories by comma
+        category_clean = category.strip() # Remove whitespaces before and after
+        categories.append(category_clean) # Add "cleaned" category to list of categories
+    return categories
